@@ -1,0 +1,28 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Danh sách sách</ui:define>
+    <ui:define name="content">
+
+        <h2>Danh sách sách</h2>
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <h:form>
+            <h:dataTable value="#{sachBean.dsSach}" var="s" styleClass="data-table">
+                <h:column><f:facet name="header">ID</f:facet>#{s.id}</h:column>
+                <h:column><f:facet name="header">Tên sách</f:facet>#{s.tenSach}</h:column>
+                <h:column><f:facet name="header">Tác giả</f:facet>#{s.tacGia}</h:column>
+                <h:column><f:facet name="header">Năm XB</f:facet>#{s.namXuatBan}</h:column>
+                <h:column>
+                    <f:facet name="header">Thao tác</f:facet>
+                    <h:commandButton value="Sửa" styleClass="btn btn-success" action="#{sachBean.edit(s.id)}" />
+                    <h:commandButton value="Xóa" styleClass="btn btn-danger" action="#{sachBean.delete(s.id)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <p><h:link outcome="sach-form" value="+ Thêm sách" /></p>
+    </ui:define>
+</ui:composition>

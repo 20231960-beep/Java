@@ -1,0 +1,33 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Đăng nhập</ui:define>
+    <ui:define name="content">
+
+        <h2>Đăng nhập (JSF)</h2>
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <div class="card" style="max-width:380px;">
+            <h:form>
+                <div class="form-row">
+                    <span class="field-label">Tên đăng nhập</span>
+                    <h:inputText id="username" value="#{loginBean.username}" required="true"
+                                 requiredMessage="Tên đăng nhập bắt buộc nhập" />
+                    <h:message for="username" styleClass="error-text" />
+                </div>
+
+                <div class="form-row">
+                    <span class="field-label">Mật khẩu</span>
+                    <h:inputSecret id="password" value="#{loginBean.password}" required="true"
+                                   requiredMessage="Mật khẩu bắt buộc nhập" />
+                    <h:message for="password" styleClass="error-text" />
+                </div>
+
+                <h:commandButton value="Đăng nhập" styleClass="btn" action="#{loginBean.login}" />
+            </h:form>
+        </div>
+
+        <p class="hint">Tài khoản mẫu: admin / 123456</p>
+    </ui:define>
+</ui:composition>

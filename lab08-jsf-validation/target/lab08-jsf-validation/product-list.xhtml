@@ -1,0 +1,30 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Danh sách sản phẩm</ui:define>
+    <ui:define name="content">
+
+        <h2>Danh sách sản phẩm</h2>
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <h:form>
+            <h:dataTable value="#{productBean.dsProduct}" var="p" styleClass="data-table">
+                <h:column><f:facet name="header">ID</f:facet>#{p.id}</h:column>
+                <h:column><f:facet name="header">Tên sản phẩm</f:facet>#{p.tenSanPham}</h:column>
+                <h:column><f:facet name="header">Giá</f:facet>
+                    <h:outputText value="#{p.gia}"><f:convertNumber type="currency" currencySymbol="đ" /></h:outputText>
+                </h:column>
+                <h:column><f:facet name="header">Số lượng</f:facet>#{p.soLuong}</h:column>
+                <h:column>
+                    <f:facet name="header">Thao tác</f:facet>
+                    <h:commandButton value="Sửa" styleClass="btn btn-success" action="#{productBean.edit(p.id)}" />
+                    <h:commandButton value="Xóa" styleClass="btn btn-danger" action="#{productBean.delete(p.id)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <p><h:link outcome="product-form" value="+ Thêm sản phẩm" /></p>
+    </ui:define>
+</ui:composition>

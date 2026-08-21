@@ -1,0 +1,37 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Danh sách sinh viên</ui:define>
+    <ui:define name="content">
+
+        <h2>Danh sách sinh viên</h2>
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <h:form>
+            <div class="form-row" style="max-width:420px;">
+                <span class="field-label">Tìm kiếm (họ tên / lớp)</span>
+                <div>
+                    <h:inputText value="#{sinhVienBean.keyword}" style="width:220px;" />
+                    <h:commandButton value="Tìm" styleClass="btn" action="sinhvien-list?faces-redirect=true" />
+                </div>
+            </div>
+
+            <h:dataTable value="#{sinhVienBean.dsSinhVien}" var="sv" styleClass="data-table">
+                <h:column><f:facet name="header">ID</f:facet>#{sv.id}</h:column>
+                <h:column><f:facet name="header">Mã SV</f:facet>#{sv.maSinhVien}</h:column>
+                <h:column><f:facet name="header">Họ tên</f:facet>#{sv.hoTen}</h:column>
+                <h:column><f:facet name="header">Email</f:facet>#{sv.email}</h:column>
+                <h:column><f:facet name="header">Lớp</f:facet>#{sv.lop}</h:column>
+                <h:column>
+                    <f:facet name="header">Thao tác</f:facet>
+                    <h:commandButton value="Sửa" styleClass="btn btn-success" action="#{sinhVienBean.edit(sv.id)}" />
+                    <h:commandButton value="Xóa" styleClass="btn btn-danger" action="#{sinhVienBean.delete(sv.id)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <p><h:link outcome="sinhvien-form" value="+ Thêm sinh viên" /></p>
+    </ui:define>
+</ui:composition>

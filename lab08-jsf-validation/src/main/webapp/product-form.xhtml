@@ -1,0 +1,43 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Form sản phẩm</ui:define>
+    <ui:define name="content">
+
+        <h2>
+            <h:outputText value="Sửa sản phẩm" rendered="#{productBean.editMode}" />
+            <h:outputText value="Thêm sản phẩm (JSF)" rendered="#{!productBean.editMode}" />
+        </h2>
+
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <div class="card">
+            <h:form>
+                <div class="form-row">
+                    <span class="field-label">Tên sản phẩm</span>
+                    <h:inputText id="ten" value="#{productBean.product.tenSanPham}" />
+                    <h:message for="ten" styleClass="error-text" />
+                </div>
+
+                <div class="form-row">
+                    <span class="field-label">Giá</span>
+                    <h:inputText id="gia" value="#{productBean.product.gia}" />
+                    <h:message for="gia" styleClass="error-text" />
+                </div>
+
+                <div class="form-row">
+                    <span class="field-label">Số lượng</span>
+                    <h:inputText id="soluong" value="#{productBean.product.soLuong}" />
+                    <h:message for="soluong" styleClass="error-text" />
+                </div>
+
+                <h:commandButton value="Cập nhật" styleClass="btn btn-success" action="#{productBean.save}" rendered="#{productBean.editMode}" />
+                <h:commandButton value="Lưu sản phẩm" styleClass="btn" action="#{productBean.save}" rendered="#{!productBean.editMode}" />
+            </h:form>
+        </div>
+
+        <p><h:link outcome="product-list" value="← Xem danh sách sản phẩm" /></p>
+    </ui:define>
+</ui:composition>

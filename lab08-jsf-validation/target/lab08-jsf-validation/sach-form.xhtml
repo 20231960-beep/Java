@@ -1,0 +1,43 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:define name="title">Form sách</ui:define>
+    <ui:define name="content">
+
+        <h2>
+            <h:outputText value="Sửa sách" rendered="#{sachBean.editMode}" />
+            <h:outputText value="Thêm sách (JSF)" rendered="#{!sachBean.editMode}" />
+        </h2>
+
+        <h:messages globalOnly="true" errorClass="msg-error" infoClass="msg-success" layout="table" />
+
+        <div class="card">
+            <h:form>
+                <div class="form-row">
+                    <span class="field-label">Tên sách</span>
+                    <h:inputText id="ten" value="#{sachBean.sach.tenSach}" />
+                    <h:message for="ten" styleClass="error-text" />
+                </div>
+
+                <div class="form-row">
+                    <span class="field-label">Tác giả</span>
+                    <h:inputText id="tacgia" value="#{sachBean.sach.tacGia}" />
+                    <h:message for="tacgia" styleClass="error-text" />
+                </div>
+
+                <div class="form-row">
+                    <span class="field-label">Năm xuất bản</span>
+                    <h:inputText id="nam" value="#{sachBean.sach.namXuatBan}" />
+                    <h:message for="nam" styleClass="error-text" />
+                </div>
+
+                <h:commandButton value="Cập nhật" styleClass="btn btn-success" action="#{sachBean.save}" rendered="#{sachBean.editMode}" />
+                <h:commandButton value="Lưu sách" styleClass="btn" action="#{sachBean.save}" rendered="#{!sachBean.editMode}" />
+            </h:form>
+        </div>
+
+        <p><h:link outcome="sach-list" value="← Xem danh sách sách" /></p>
+    </ui:define>
+</ui:composition>
